@@ -10,7 +10,7 @@ export function activeChatMiddleware(store) {
             setTimeout(() => {
                 const isChatActive = false;
                 store.dispatch(chatsNotActive(chatId, isChatActive));
-            }, 5000);
+            }, 10000);
         }
         return next(action);
     }

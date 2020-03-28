@@ -6,34 +6,10 @@ import {
     CHATS_DELETE,
     CHATS_ACTIVE,
     CHATS_NOT_ACTIVE,
+    CHATS_REQUEST,
+    CHATS_SUCCESS,
+    CHATS_FAILURE,
 } from 'actions/chats';
-
-const dataBackend = {
-    1: {
-        id: 1,
-        name: 'chat1',
-        messages: [
-            {text: 'Это чат №1!', author: 'bot'},
-        ],
-        isActive: false,
-    },
-    2: {
-        id: 2,
-        name: 'chat2',
-        messages: [
-            {text: 'Привет!!! Это чат №2!', author: 'bot'},
-        ],
-        isActive: false,
-    },
-    3: {
-        id: 3,
-        name: 'chat3',
-        messages: [
-            {text: 'Привет!!! Это чат №3!', author: 'bot'},
-        ],
-        isActive: false,
-    }
-};
 
 const initialState = {
     loading: false,
@@ -43,12 +19,6 @@ const initialState = {
 export const chatsReducer = (state = initialState, action) => {
     switch(action.type)
     {
-        case CHATS_LOAD:
-            const entryData = Array.isArray(state.entries) ? dataBackend : state.entries;
-            return {
-                ...state,
-                entries: entryData,
-            }
         case CHATS_SEND:
             return update(state, {
                 entries: {
@@ -95,6 +65,28 @@ export const chatsReducer = (state = initialState, action) => {
                     }
                 }
             })
+
+        case CHATS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: false,
+            };
+        case CHATS_SUCCESS:
+            const entryData = Array.isArray(state.entries) ? action.payload : state.entries;
+            console.log(state)
+            return {
+                ...state,
+                loading: false,
+                entries: entryData,
+            };
+        case CHATS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+            };
+
         default: 
             return state;
     }

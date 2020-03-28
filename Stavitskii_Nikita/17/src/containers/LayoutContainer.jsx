@@ -36,7 +36,7 @@ class LayoutContainer extends Component {
     }
 
     render() {
-        const {chats, messages, deleteChat} = this.props;
+        const {chats, messages, deleteChat, isLoading, isFailure} = this.props;
         return (<Layout
             chats={chats}
             messages={messages}
@@ -44,6 +44,8 @@ class LayoutContainer extends Component {
             addChat={this.handleChatAdd}
             handleLinkClick={this.handleLinkClick}
             deleteChat={deleteChat}
+            isLoading={isLoading}
+            isFailure={isFailure}
         />);
     }
 }
@@ -69,6 +71,8 @@ function mapStateToProps(state, ownProps) {
         chats: chatsArrayForShow,
         messages,
         chatId: match ? match.params.id : null,
+        isLoading: state.chats.loading,
+        isFailure: state.chats.error
     }
 }
 

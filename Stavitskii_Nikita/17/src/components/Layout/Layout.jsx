@@ -7,7 +7,15 @@ import {Messenger} from "../Messenger";
 
 export class Layout extends Component {
     render() {
-        const {chats, messages, sendMessage, addChat, handleLinkClick, deleteChat} = this.props;
+        const {chats, messages, sendMessage, addChat, handleLinkClick, deleteChat, isLoading, isFailure} = this.props;
+
+        if(isLoading){
+            return (<div>Loading...</div>);
+        }
+
+        if(isFailure){
+            return (<div>Попробуйте обновить страницу, сервис временно недоступен...</div>);
+        }
 
         return (
             <div className="layout">

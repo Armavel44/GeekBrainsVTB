@@ -1,5 +1,4 @@
 import {LayoutRedux} from 'containers/LayoutContainer';
-import {AboutPage} from 'pages/AboutPage';
 import {NotFoundPage} from 'pages/NotFoundPage/NotFoundPage';
 import {ProfileRedux} from "containers/ProfileContainer";
 
