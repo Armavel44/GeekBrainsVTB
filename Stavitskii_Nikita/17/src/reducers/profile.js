@@ -22,7 +22,6 @@ export const profileReducer = (state = initialState, action) => {
             };
         case PROFILE_SUCCESS:
             const entryData = Array.isArray(state.entries) ? action.payload : state.entries;
-            console.log(state)
             return {
                 ...state,
                 loading: false,

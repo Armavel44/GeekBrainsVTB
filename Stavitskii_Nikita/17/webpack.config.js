@@ -1,11 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.js'),
     devtool: 'eval-source-map',
-
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -49,7 +49,14 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'main.css',
-        })
+        }),
+        new CopyPlugin([
+            {from: path.resolve(__dirname, 'api'), to: path.resolve(__dirname, 'dist', 'api')},
+            {from: path.resolve(__dirname, 'src', 'sw.js'), to: path.resolve(__dirname, 'dist')},
+            {from: path.resolve(__dirname, 'src', 'manifest.json'), to: path.resolve(__dirname, 'dist')},
+            {from: path.resolve(__dirname, 'src', 'assets', 'images'), to: path.resolve(__dirname, 'dist', 'images')},
+            ]
+        )
     ],
     devServer: {
         historyApiFallback: true, //Чтобы все запросы направлялись на 1 страницу

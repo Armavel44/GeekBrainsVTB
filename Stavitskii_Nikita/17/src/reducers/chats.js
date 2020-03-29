@@ -47,9 +47,8 @@ export const chatsReducer = (state = initialState, action) => {
                 }
             }
             delete newState.entries[action.payload.chatId];
-            console.log(state)
             return newState;
-        case CHATS_ACTIVE:
+        case CHATS_ACTIVE: case CHATS_NOT_ACTIVE:
              return update(state, {
                  entries: {
                      [action.payload.chatId]: {
@@ -57,14 +56,6 @@ export const chatsReducer = (state = initialState, action) => {
                      }
                  }
              })
-        case CHATS_NOT_ACTIVE:
-            return update(state, {
-                entries: {
-                    [action.payload.chatId]: {
-                        isActive: {$set: action.payload.isActive}
-                    }
-                }
-            })
 
         case CHATS_REQUEST:
             return {

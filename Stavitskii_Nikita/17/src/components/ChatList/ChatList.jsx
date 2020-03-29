@@ -49,7 +49,7 @@ export class ChatList extends Component {
             <List className="chat-list">
                 {chats.map((chat, index) => {
                     let message = chat.messages[chat.messages.length - 1];
-                    const secondaryValue = message === undefined ? 'No messages in chat' : (message.author + ': ' + message.text);
+                    const secondaryValue = message ? (message.author + ': ' + message.text) : 'No messages in chat';
                     const activeClass = chat.isActive ? 'active-chat' : '';
                     return (
                         <div key={index} className={activeClass}>
