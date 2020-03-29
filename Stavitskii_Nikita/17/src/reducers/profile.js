@@ -1,4 +1,4 @@
-import {PROFILE_LOAD, PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAILURE} from 'actions/profile';
+import {PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAILURE} from 'actions/profile';
 
 const initialState = {
     loading: false,
@@ -6,13 +6,6 @@ const initialState = {
 }
 
 export const profileReducer = (state = initialState, action) => {
-    // if (action.type === PROFILE_LOAD) {
-    //
-    //     return ({...state, entries: backendData})
-    // } else {
-    //     return state;
-    // }
-
     switch (action.type) {
         case PROFILE_REQUEST:
             return {
@@ -21,11 +14,10 @@ export const profileReducer = (state = initialState, action) => {
                 error: false,
             };
         case PROFILE_SUCCESS:
-            const entryData = Array.isArray(state.entries) ? action.payload : state.entries;
             return {
                 ...state,
                 loading: false,
-                entries: entryData,
+                entries: action.payload,
             };
         case PROFILE_FAILURE:
             return {

@@ -17,7 +17,7 @@ export function activeChatMiddleware(store) {
         } else if (action.type === '@@router/LOCATION_CHANGE' && !action.payload.isFirstRendering) {
             const chatId = action.payload.location.pathname.split('/')[2];
             const isChatActive = false;
-            if (store.getState().chats.entries[chatId].isActive) {
+            if (typeof(chatId) !== 'undefined' && store.getState().chats.entries[chatId].isActive) {
                 store.dispatch(chatsActive(chatId, isChatActive));
             }
         }
